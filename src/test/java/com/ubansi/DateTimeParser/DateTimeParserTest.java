@@ -1,7 +1,6 @@
 package com.ubansi.DateTimeParser;
 
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +14,12 @@ public class DateTimeParserTest extends TestCase {
 	private DateTimeFormatter formater = DateTimeFormatter.ISO_DATE_TIME;
 
 	@Test
-	public void testSetZoneId() {
-		DateTimeParser dtp = new DateTimeParser();
-		dtp.setZoneOffset("+9");
-
-		assertEquals("+09:00", ZoneOffset.of("+9").getId());
-	}
-
-	@Test
-	public void testMySQLFormat() {
+	public void testMySQLDateFormat() {
 		List<String> mysqlDates = new ArrayList<String>() {
 			{
 				add("2017-12-02");
+				add("17-12-02");
+				add("17-12-2");
 			}
 		};
 
@@ -36,5 +29,20 @@ public class DateTimeParserTest extends TestCase {
 			assertEquals(time.format(formater),"2017-12-02T00:00:00");
 		}
 
+	}
+
+	@Test
+	public void testMySQLDateTimeFormat() {
+		List<String> mysqlDates = new ArrayList<String>() {
+			{
+				add("2017-12-02 12:01:02");
+			}
+		};
+
+		for (String date : mysqlDates) {
+			LocalDateTime time = dtp.parse(date);
+
+			assertEquals(time.format(formater),"2017-12-02T12:01:02");
+		}
 	}
 }
