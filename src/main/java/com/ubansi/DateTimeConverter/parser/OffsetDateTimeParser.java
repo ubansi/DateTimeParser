@@ -9,6 +9,8 @@ import java.util.List;
 
 public class OffsetDateTimeParser implements DateTimeParserInterface {
 
+	private List<String> info = new ArrayList<String>();
+
 	private final static List<DateTimeFormatter> FORMATS = new ArrayList<DateTimeFormatter>() {
 		{
 			add(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
@@ -17,12 +19,13 @@ public class OffsetDateTimeParser implements DateTimeParserInterface {
 
 	@Override
 	public LocalDateTime parse(String input) {
+		info.clear();
 
 		// デフォルト解析を試す
 		try {
 			return OffsetDateTime.parse(input).toLocalDateTime();
 		} catch (DateTimeParseException e) {
-
+			info.add(e.getMessage());
 		}
 
 		// 書式を指定して実行
@@ -30,10 +33,15 @@ public class OffsetDateTimeParser implements DateTimeParserInterface {
 			try {
 				return OffsetDateTime.parse(input, format).toLocalDateTime();
 			} catch (DateTimeParseException e) {
-
+				info.add(e.getMessage());
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<String> getExceptionInfo() {
+		return info;
 	}
 
 }

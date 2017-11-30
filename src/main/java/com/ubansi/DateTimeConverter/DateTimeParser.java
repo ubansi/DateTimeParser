@@ -26,7 +26,7 @@ public class DateTimeParser {
 
 		LocalDateTime result = null;
 
-		for(DateTimeParserInterface parser: PARSERS) {
+		for (DateTimeParserInterface parser : PARSERS) {
 			result = parser.parse(input);
 
 			if (result != null) {
@@ -34,7 +34,9 @@ public class DateTimeParser {
 			}
 		}
 
-		throw new DateTimeParseException("解析に失敗しました。("+input+")", input, 0);
+		PARSERS.forEach(parser -> parser.getExceptionInfo().forEach(s -> System.out.println(s)));
+
+		throw new DateTimeParseException("解析に失敗しました。(" + input + ")", input, 0);
 
 	}
 
