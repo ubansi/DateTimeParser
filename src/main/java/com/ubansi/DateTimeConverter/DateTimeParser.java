@@ -34,10 +34,8 @@ public class DateTimeParser {
 			}
 		}
 
-		if (result == null) {
-			throw new DateTimeParseException("日付の解析に失敗しました。", input, 0);
-		}
-		return result;
+		throw new DateTimeParseException("解析に失敗しました。("+input+")", input, 0);
+
 	}
 
 }

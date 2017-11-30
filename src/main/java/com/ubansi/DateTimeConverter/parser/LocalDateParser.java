@@ -13,8 +13,13 @@ public class LocalDateParser implements DateTimeParserInterface {
 		{
 			add(DateTimeFormatter.ISO_LOCAL_DATE);
 			add(DateTimeFormatter.BASIC_ISO_DATE);
+			add(DateTimeFormatter.ISO_DATE);
 			add(DateTimeFormatter.ofPattern("yy-MM-dd"));
 			add(DateTimeFormatter.ofPattern("yy-M-d"));
+			add(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+			add(DateTimeFormatter.ofPattern("yyyy/M/d"));
+			add(DateTimeFormatter.ofPattern("yyyy年M月d日"));
+
 
 		}
 	};
@@ -23,11 +28,10 @@ public class LocalDateParser implements DateTimeParserInterface {
 	public LocalDateTime parse(String input) {
 
 		// デフォルト解析を試す
-
 		try {
 			return LocalDate.parse(input).atStartOfDay();
 		} catch (DateTimeParseException e) {
-			// TODO: handle exception
+
 		}
 
 		for (DateTimeFormatter formatter : FORMATS) {

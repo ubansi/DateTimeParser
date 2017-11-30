@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.ubansi.DateTimeConverter.DateTimeParser;
-
 import junit.framework.TestCase;
 
 public class DateTimeParserTest extends TestCase {
@@ -22,6 +20,11 @@ public class DateTimeParserTest extends TestCase {
 				add("2017-12-02");
 				add("17-12-02");
 				add("17-12-2");
+				add("20171202");
+				add("2017/12/02");
+				add("2017/12/2");
+				add("2017年12月2日");
+
 			}
 		};
 
