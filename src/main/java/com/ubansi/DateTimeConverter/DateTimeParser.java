@@ -1,5 +1,6 @@
 package com.ubansi.DateTimeConverter;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -32,6 +33,13 @@ public class DateTimeParser {
 			if (result != null) {
 				return result;
 			}
+		}
+
+		try {
+			Timestamp timestamp = new Timestamp(Long.parseLong(input) * 1000L);
+			return timestamp.toLocalDateTime();
+		} catch (NumberFormatException e) {
+
 		}
 
 		PARSERS.forEach(parser -> parser.getExceptionInfo().forEach(s -> System.out.println(s)));

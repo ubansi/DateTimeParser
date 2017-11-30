@@ -14,6 +14,9 @@ public class LocalDateTimeParser implements DateTimeParserInterface{
 		{
 			add(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 			add(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+			add(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+			add(DateTimeFormatter.ofPattern(""));
+
 		}
 	};
 	@Override

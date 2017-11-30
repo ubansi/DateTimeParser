@@ -41,6 +41,8 @@ public class DateTimeParserTest extends TestCase {
 		List<String> mysqlDates = new ArrayList<String>() {
 			{
 				add("2017-12-02 12:01:02");
+				add("2017/12/02 12:01:02");
+				add("1512183662");
 			}
 		};
 
