@@ -1,36 +1,33 @@
-package com.ubansi.DateTimeParser;
+package com.ubansi.DateTimeConverter.parser;
 
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OffsetDateTimeParser implements DateTimeParserInterface {
-
+public class LocalDateTimeParser implements DateTimeParserInterface{
 	private final static List<DateTimeFormatter> FORMATS = new ArrayList<DateTimeFormatter>() {
 		{
-			add(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+			add(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+			add(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		}
 	};
-
 	@Override
 	public LocalDateTime parse(String input) {
 
 		// デフォルト解析を試す
 		try {
-			return OffsetDateTime.parse(input).toLocalDateTime();
+			return LocalDateTime.parse(input);
 		} catch (DateTimeParseException e) {
-
+			// デフォルト解析失敗
 		}
 
-		// 書式を指定して実行
-		for (DateTimeFormatter format : FORMATS) {
+		for (DateTimeFormatter formatter : FORMATS) {
 			try {
-				return OffsetDateTime.parse(input, format).toLocalDateTime();
+				return LocalDateTime.parse(input, formatter);
 			} catch (DateTimeParseException e) {
-
+				// 日付に変換できなかった
 			}
 		}
 		return null;

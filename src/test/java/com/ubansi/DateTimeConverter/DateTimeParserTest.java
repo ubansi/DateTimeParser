@@ -1,4 +1,4 @@
-package com.ubansi.DateTimeParser;
+package com.ubansi.DateTimeConverter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import com.ubansi.DateTimeConverter.DateTimeParser;
 
 import junit.framework.TestCase;
 

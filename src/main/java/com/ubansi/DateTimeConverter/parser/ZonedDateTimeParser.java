@@ -1,16 +1,17 @@
-package com.ubansi.DateTimeParser;
+package com.ubansi.DateTimeConverter.parser;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalDateTimeParser implements DateTimeParserInterface{
+public class ZonedDateTimeParser implements DateTimeParserInterface {
+
 	private final static List<DateTimeFormatter> FORMATS = new ArrayList<DateTimeFormatter>() {
 		{
-			add(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-			add(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+			add(DateTimeFormatter.ISO_ZONED_DATE_TIME);
 		}
 	};
 	@Override
@@ -18,16 +19,17 @@ public class LocalDateTimeParser implements DateTimeParserInterface{
 
 		// デフォルト解析を試す
 		try {
-			return LocalDateTime.parse(input);
+			return ZonedDateTime.parse(input).toLocalDateTime();
 		} catch (DateTimeParseException e) {
-			// デフォルト解析失敗
+
 		}
 
-		for (DateTimeFormatter formatter : FORMATS) {
+		// 書式を指定して実行
+		for (DateTimeFormatter format : FORMATS) {
 			try {
-				return LocalDateTime.parse(input, formatter);
+				return ZonedDateTime.parse(input, format).toLocalDateTime();
 			} catch (DateTimeParseException e) {
-				// 日付に変換できなかった
+
 			}
 		}
 		return null;
