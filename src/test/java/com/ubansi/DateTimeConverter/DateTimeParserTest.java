@@ -25,7 +25,6 @@ public class DateTimeParserTest extends TestCase {
 				add("2017/12/02");
 				add("2017/12/2");
 				add("2017年12月2日");
-
 			}
 		};
 
@@ -62,7 +61,27 @@ public class DateTimeParserTest extends TestCase {
 			assertTrue(false);
 
 		} catch (DateTimeParseException e) {
-			assertEquals(e.getMessage(),"解析に失敗しました。(\"\")");
+			assertEquals(e.getMessage(), "解析に失敗しました。(\"\")");
+		}
+	}
+
+	@Test
+	public void test0Input() {
+
+		LocalDateTime time = dtp.parse("0");
+		assertEquals(time.toString(), "1970-01-01T09:00");
+		System.out.println(time.toString());
+
+	}
+	@Test
+	public void testAInput() {
+
+		try {
+			LocalDateTime time = dtp.parse("A");
+			assertTrue(false);
+
+		} catch (DateTimeParseException e) {
+			assertEquals(e.getMessage(), "解析に失敗しました。(\"A\")");
 		}
 	}
 }

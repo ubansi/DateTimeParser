@@ -9,6 +9,7 @@ import java.util.List;
 
 public class LocalDateParser extends TimeParser {
 
+	// フォーマットを片っ端から定義
 	private final static List<DateTimeFormatter> FORMATS = new ArrayList<DateTimeFormatter>() {
 		{
 			add(DateTimeFormatter.ISO_LOCAL_DATE);
@@ -34,10 +35,12 @@ public class LocalDateParser extends TimeParser {
 			addExceptionMessage(e);
 		}
 
+		// 指定フォーマットで解析
 		for (DateTimeFormatter formatter : FORMATS) {
 			try {
 				return LocalDate.parse(input, formatter).atStartOfDay();
 			} catch (DateTimeParseException e) {
+				// 失敗したログはリストへ保存しておく
 				addExceptionMessage(e);
 			}
 		}
