@@ -23,7 +23,7 @@ public class ZonedDateTimeParser extends TimeParser {
 		try {
 			return ZonedDateTime.parse(input).toLocalDateTime();
 		} catch (DateTimeParseException e) {
-			failsMessages.add(e.getMessage());
+			addExceptionMessage(e);
 		}
 
 		// 書式を指定して実行
@@ -31,7 +31,7 @@ public class ZonedDateTimeParser extends TimeParser {
 			try {
 				return ZonedDateTime.parse(input, format).toLocalDateTime();
 			} catch (DateTimeParseException e) {
-				failsMessages.add(e.getMessage());
+				addExceptionMessage(e);
 			}
 		}
 		return null;

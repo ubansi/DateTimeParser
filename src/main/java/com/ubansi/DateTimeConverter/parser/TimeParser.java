@@ -21,6 +21,10 @@ public abstract class TimeParser {
 	 */
 	public abstract LocalDateTime parse(String input);
 
+	protected void addExceptionMessage(Exception e) {
+		failsMessages.add(e.getMessage() + " ("+this.getClass().getSimpleName()+")");
+	}
+
 	public List<String> getExceptionInfo(){
 		return failsMessages;
 	};

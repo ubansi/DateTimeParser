@@ -24,14 +24,14 @@ public class LocalDateTimeParser extends TimeParser{
 		try {
 			return LocalDateTime.parse(input);
 		} catch (DateTimeParseException e) {
-			failsMessages.add(e.getMessage());
+			addExceptionMessage(e);
 		}
 
 		for (DateTimeFormatter formatter : FORMATS) {
 			try {
 				return LocalDateTime.parse(input, formatter);
 			} catch (DateTimeParseException e) {
-				failsMessages.add(e.getMessage());
+				addExceptionMessage(e);
 			}
 		}
 		return null;

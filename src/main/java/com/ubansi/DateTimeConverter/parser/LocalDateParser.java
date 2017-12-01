@@ -31,14 +31,14 @@ public class LocalDateParser extends TimeParser {
 		try {
 			return LocalDate.parse(input).atStartOfDay();
 		} catch (DateTimeParseException e) {
-			failsMessages.add(e.getMessage());
+			addExceptionMessage(e);
 		}
 
 		for (DateTimeFormatter formatter : FORMATS) {
 			try {
 				return LocalDate.parse(input, formatter).atStartOfDay();
 			} catch (DateTimeParseException e) {
-				failsMessages.add(e.getMessage());
+				addExceptionMessage(e);
 			}
 		}
 		return null;

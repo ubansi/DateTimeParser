@@ -5,10 +5,10 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ubansi.DateTimeConverter.parser.TimeParser;
 import com.ubansi.DateTimeConverter.parser.LocalDateParser;
 import com.ubansi.DateTimeConverter.parser.LocalDateTimeParser;
 import com.ubansi.DateTimeConverter.parser.OffsetDateTimeParser;
+import com.ubansi.DateTimeConverter.parser.TimeParser;
 import com.ubansi.DateTimeConverter.parser.TimestampParser;
 import com.ubansi.DateTimeConverter.parser.ZonedDateTimeParser;
 
@@ -38,7 +38,7 @@ public class DateTimeParser {
 
 		PARSERS.forEach(parser -> parser.getExceptionInfo().forEach(s -> System.out.println(s)));
 
-		throw new DateTimeParseException("解析に失敗しました。(" + input + ")", input, 0);
+		throw new DateTimeParseException("解析に失敗しました。(\"" + input + "\")", input, 0);
 
 	}
 
