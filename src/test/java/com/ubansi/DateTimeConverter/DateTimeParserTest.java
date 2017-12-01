@@ -2,6 +2,7 @@ package com.ubansi.DateTimeConverter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +15,8 @@ public class DateTimeParserTest extends TestCase {
 	private DateTimeFormatter formater = DateTimeFormatter.ISO_DATE_TIME;
 
 	@Test
-	public void testMySQLDateFormat() {
-		List<String> mysqlDates = new ArrayList<String>() {
+	public void testDateFormat() {
+		List<String> dates = new ArrayList<String>() {
 			{
 				add("2017-12-02");
 				add("17-12-02");
@@ -28,17 +29,17 @@ public class DateTimeParserTest extends TestCase {
 			}
 		};
 
-		for (String date : mysqlDates) {
+		for (String date : dates) {
 			LocalDateTime time = dtp.parse(date);
 
-			assertEquals(time.format(formater),"2017-12-02T00:00:00");
+			assertEquals(time.format(formater), "2017-12-02T00:00:00");
 		}
 
 	}
 
 	@Test
-	public void testMySQLDateTimeFormat() {
-		List<String> mysqlDates = new ArrayList<String>() {
+	public void testDateTimeFormat() {
+		List<String> datetimes = new ArrayList<String>() {
 			{
 				add("2017-12-02 12:01:02");
 				add("2017/12/02 12:01:02");
@@ -46,10 +47,22 @@ public class DateTimeParserTest extends TestCase {
 			}
 		};
 
-		for (String date : mysqlDates) {
+		for (String date : datetimes) {
 			LocalDateTime time = dtp.parse(date);
 
-			assertEquals(time.format(formater),"2017-12-02T12:01:02");
+			assertEquals(time.format(formater), "2017-12-02T12:01:02");
+		}
+	}
+
+	@Test
+	public void testEmptyInput() {
+
+		try {
+			LocalDateTime time = dtp.parse("");
+			assertTrue(false);
+
+		} catch (DateTimeParseException e) {
+			assertEquals(e.getMessage(),"解析に失敗しました。(\"\")");
 		}
 	}
 }
