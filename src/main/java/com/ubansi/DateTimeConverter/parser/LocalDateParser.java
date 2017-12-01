@@ -7,9 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LocalDateParser implements DateTimeParserInterface {
-
-	private List<String> info = new ArrayList<String>();
+public class LocalDateParser extends TimeParser {
 
 	private final static List<DateTimeFormatter> FORMATS = new ArrayList<DateTimeFormatter>() {
 		{
@@ -27,28 +25,22 @@ public class LocalDateParser implements DateTimeParserInterface {
 
 	@Override
 	public LocalDateTime parse(String input) {
-		info.clear();
+		failsMessages.clear();
 
 		// デフォルト解析を試す
 		try {
 			return LocalDate.parse(input).atStartOfDay();
 		} catch (DateTimeParseException e) {
-			info.add(e.getMessage());
+			failsMessages.add(e.getMessage());
 		}
 
 		for (DateTimeFormatter formatter : FORMATS) {
 			try {
 				return LocalDate.parse(input, formatter).atStartOfDay();
 			} catch (DateTimeParseException e) {
-				info.add(e.getMessage());
+				failsMessages.add(e.getMessage());
 			}
 		}
 		return null;
 	}
-
-	@Override
-	public List<String> getExceptionInfo() {
-		return info;
-	}
-
 }

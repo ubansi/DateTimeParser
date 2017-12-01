@@ -1,10 +1,15 @@
 package com.ubansi.DateTimeConverter.parser;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-public interface DateTimeParserInterface {
+public abstract class TimeParser {
 
+	/**
+	 * fails info
+	 */
+	protected List<String> failsMessages = new ArrayList<String>();
 
 	/**
 	 * This function forcibly converts a string to a date.
@@ -14,7 +19,9 @@ public interface DateTimeParserInterface {
 	 * @param input
 	 * @return LocalDateTime instance or {@code null}
 	 */
-	public LocalDateTime parse(String input);
+	public abstract LocalDateTime parse(String input);
 
-	public List<String> getExceptionInfo();
+	public List<String> getExceptionInfo(){
+		return failsMessages;
+	};
 }

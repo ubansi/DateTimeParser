@@ -5,7 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ubansi.DateTimeConverter.parser.DateTimeParserInterface;
+import com.ubansi.DateTimeConverter.parser.TimeParser;
 import com.ubansi.DateTimeConverter.parser.LocalDateParser;
 import com.ubansi.DateTimeConverter.parser.LocalDateTimeParser;
 import com.ubansi.DateTimeConverter.parser.OffsetDateTimeParser;
@@ -14,7 +14,7 @@ import com.ubansi.DateTimeConverter.parser.ZonedDateTimeParser;
 
 public class DateTimeParser {
 
-	private final static List<DateTimeParserInterface> PARSERS = new ArrayList<DateTimeParserInterface>() {
+	private final static List<TimeParser> PARSERS = new ArrayList<TimeParser>() {
 		{
 			add(new OffsetDateTimeParser());
 			add(new ZonedDateTimeParser());
@@ -28,7 +28,7 @@ public class DateTimeParser {
 
 		LocalDateTime result = null;
 
-		for (DateTimeParserInterface parser : PARSERS) {
+		for (TimeParser parser : PARSERS) {
 			result = parser.parse(input);
 
 			if (result != null) {

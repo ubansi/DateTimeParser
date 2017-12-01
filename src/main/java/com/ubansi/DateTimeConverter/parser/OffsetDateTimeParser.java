@@ -7,9 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OffsetDateTimeParser implements DateTimeParserInterface {
-
-	private List<String> info = new ArrayList<String>();
+public class OffsetDateTimeParser extends TimeParser {
 
 	private final static List<DateTimeFormatter> FORMATS = new ArrayList<DateTimeFormatter>() {
 		{
@@ -19,13 +17,13 @@ public class OffsetDateTimeParser implements DateTimeParserInterface {
 
 	@Override
 	public LocalDateTime parse(String input) {
-		info.clear();
+		failsMessages.clear();
 
 		// デフォルト解析を試す
 		try {
 			return OffsetDateTime.parse(input).toLocalDateTime();
 		} catch (DateTimeParseException e) {
-			info.add(e.getMessage());
+			failsMessages.add(e.getMessage());
 		}
 
 		// 書式を指定して実行
@@ -33,15 +31,10 @@ public class OffsetDateTimeParser implements DateTimeParserInterface {
 			try {
 				return OffsetDateTime.parse(input, format).toLocalDateTime();
 			} catch (DateTimeParseException e) {
-				info.add(e.getMessage());
+				failsMessages.add(e.getMessage());
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public List<String> getExceptionInfo() {
-		return info;
 	}
 
 }
