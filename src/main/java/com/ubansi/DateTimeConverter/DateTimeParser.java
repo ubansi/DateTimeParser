@@ -1,6 +1,5 @@
 package com.ubansi.DateTimeConverter;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import com.ubansi.DateTimeConverter.parser.DateTimeParserInterface;
 import com.ubansi.DateTimeConverter.parser.LocalDateParser;
 import com.ubansi.DateTimeConverter.parser.LocalDateTimeParser;
 import com.ubansi.DateTimeConverter.parser.OffsetDateTimeParser;
+import com.ubansi.DateTimeConverter.parser.TimestampParser;
 import com.ubansi.DateTimeConverter.parser.ZonedDateTimeParser;
 
 public class DateTimeParser {
@@ -20,6 +20,7 @@ public class DateTimeParser {
 			add(new ZonedDateTimeParser());
 			add(new LocalDateTimeParser());
 			add(new LocalDateParser());
+			add(new TimestampParser());
 		}
 	};
 
@@ -33,13 +34,6 @@ public class DateTimeParser {
 			if (result != null) {
 				return result;
 			}
-		}
-
-		try {
-			Timestamp timestamp = new Timestamp(Long.parseLong(input) * 1000L);
-			return timestamp.toLocalDateTime();
-		} catch (NumberFormatException e) {
-
 		}
 
 		PARSERS.forEach(parser -> parser.getExceptionInfo().forEach(s -> System.out.println(s)));
