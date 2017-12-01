@@ -14,6 +14,8 @@ import com.ubansi.DateTimeConverter.parser.ZonedDateTimeParser;
 
 public class DateTimeParser {
 
+	// エラー保持用リスト
+	private List<String> errors = new ArrayList<String>();
 	// 解析クラスを作成
 	private final static List<TimeParser> PARSERS = new ArrayList<TimeParser>() {
 		{
@@ -27,6 +29,7 @@ public class DateTimeParser {
 	};
 
 	public LocalDateTime parse(String input) {
+		errors.clear();
 
 		LocalDateTime result = null;
 
@@ -37,14 +40,16 @@ public class DateTimeParser {
 			if (result != null) {
 				return result;
 			}
+			errors.addAll(parser.getExceptionInfo());
 		}
-
-		// ここに来る場合、すべての解析で失敗しているのでログを取得して全て出力
-		PARSERS.forEach(parser -> parser.getExceptionInfo().forEach(s -> System.out.println(s)));
 
 		throw new DateTimeParseException("解析に失敗しました。(\"" + input + "\")", input, 0);
 
 		// return がない！
+	}
+
+	public List<String> getErrors(){
+		return errors;
 	}
 
 }

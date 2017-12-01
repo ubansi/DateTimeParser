@@ -81,6 +81,7 @@ public class DateTimeParserTest extends TestCase {
 			assertTrue(false);
 
 		} catch (DateTimeParseException e) {
+			dtp.getErrors().forEach(s -> System.out.println(s));
 			assertEquals(e.getMessage(), "解析に失敗しました。(\"A\")");
 		}
 	}
