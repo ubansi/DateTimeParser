@@ -15,5 +15,5 @@ LocalDateTime result = dtp.parse(date);
 ```
 
 ## error log
-When output standard IO in `DateTimeParser#parse`.
-It is output when failure occurs in all formats.
+`DateTimeParser#getErrors` 
+you can get all parser error as ArrayList<String> 
