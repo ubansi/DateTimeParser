@@ -9,7 +9,7 @@ public abstract class TimeParser {
 	/**
 	 * fails info
 	 */
-	protected List<String> failsMessages = new ArrayList<String>();
+	protected List<String> failsMessages = new ArrayList<>();
 
 	/**
 	 * This function forcibly converts a string to a date.

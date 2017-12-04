@@ -15,7 +15,7 @@ import com.ubansi.DateTimeConverter.parser.ZonedDateTimeParser;
 public class DateTimeParser {
 
 	// エラー保持用リスト
-	private List<String> errors = new ArrayList<String>();
+	private List<String> errors = new ArrayList<>();
 	// 解析クラスを作成
 	private final static List<TimeParser> PARSERS = new ArrayList<TimeParser>() {
 		{
